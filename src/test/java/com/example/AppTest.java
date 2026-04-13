@@ -1,44 +1,35 @@
 package com.example;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertFalse;
+import org.junit.Test;
+
 public class AppTest {
-    public static void main(String[] args) {
-        // Run individual test cases
-        testCalculateTotal();
-        testEligibilityCheck();
-        
-        System.out.println("----------------------------");
-        System.out.println("ALL TESTS PASSED SUCCESSFULLY");
-        System.out.println("----------------------------");
-    }
 
     /**
      * Test Case 1: Verifies that the summing logic is correct.
      */
-    static void testCalculateTotal() {
-        System.out.print("Testing Total Calculation... ");
-        
+    @Test
+    public void testCalculateTotal() {
         // Sample array of credits
-        int[] sampleCredits = new int[] {4, 4, 5, 3}; // Total should be 16
+        int[] sampleCredits = new int[] {4, 4, 5, 3};
         
+        // Total logic
         int result = 0;
         for (int i = 0; i < sampleCredits.length; i++) {
             result += sampleCredits[i];
         }
 
-        if (result == 16) {
-            System.out.println("PASS");
-        } else {
-            System.out.println("FAIL (Expected 16, got " + result + ")");
-            System.exit(1); // Stop program on failure
-        }
+        // JUnit Assertion: (Expected, Actual)
+        assertEquals("Total calculation should be 16", 16, result);
     }
 
     /**
      * Test Case 2: Verifies the eligibility threshold (15 credits).
      */
-    static void testEligibilityCheck() {
-        System.out.print("Testing Eligibility Logic... ");
-        
+    @Test
+    public void testEligibilityCheck() {
         int passCredits = 15;
         int failCredits = 14;
 
@@ -46,11 +37,8 @@ public class AppTest {
         boolean shouldPass = (passCredits >= 15);
         boolean shouldFail = (failCredits >= 15);
 
-        if (shouldPass == true && shouldFail == false) {
-            System.out.println("PASS");
-        } else {
-            System.out.println("FAIL");
-            System.exit(1);
-        }
+        // JUnit Assertions
+        assertTrue("15 credits should pass eligibility", shouldPass);
+        assertFalse("14 credits should fail eligibility", shouldFail);
     }
 }
